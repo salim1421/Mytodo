@@ -1,0 +1,23 @@
+{% extends 'task/base.html' %}
+{% block content %}
+
+<h2>
+    {{ object.title }}
+</h2>
+
+<div>
+    {{ object.content }}
+    {{ object.category}}
+</div>
+<form action="{% url 'like_post' post.id %}" method="post">
+    {% csrf_token %}
+    
+    {% if liked %}
+        <button value="{{ post.id }}" name="post_id" type="submit">Unlike</button>
+    {% else %}
+        <button value="{{ post.id }}" name="post_id" type="submit">Like</button>
+    {% endif %}
+        - {{ total_likes }} {{ total_likes|pluralize }}
+</form>
+
+{% endblock content %}

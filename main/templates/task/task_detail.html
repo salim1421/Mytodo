@@ -1,0 +1,18 @@
+{% extends 'task/base.html' %}
+{% block content %}
+
+<div>
+    {% if task.complete %}
+        
+    <strike>{{ object.title }}</strike>
+    <strike>{{ object.description }}</strike>
+
+    {% else %}
+    
+    {{ object.title }}
+    {{ object.description }}
+
+    {% endif %}
+</div>
+
+{% endblock content %}

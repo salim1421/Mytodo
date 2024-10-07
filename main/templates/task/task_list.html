@@ -1,0 +1,37 @@
+{% extends 'task/base.html' %}
+{% block content %}
+
+<h2>
+   You Have ({{ count }}) Uncompleted Task!
+</h2>
+
+{% for task in tasks %}
+   <a href="{% url 'task-update' task.id %}">Update</a>
+   <a href="{% url 'task-delete' task.id %}">Delete</a>
+   
+   {% if task.complete %}
+   <strike><a href="{% url 'task-detail' task.id %}">{{ task.title }}</a></strike>
+   {% else %}
+   <a href="{% url 'task-detail' task.id %}">{{ task.title }}</a>   
+   {% endif %}
+      
+    
+{% endfor %}
+
+
+{% if is_paginated %}
+
+{% if page_obj.has_previous %}
+   <a href="?page{{ page_obj.previous_page_number }}"> Previous </a>
+{% endif %}
+
+{% if page_obj.has_next %}
+   <a href="?page{{ page_obj.next_page_number}}">Next</a>
+{% endif %}
+
+   
+      
+{% endif %}
+   
+
+{% endblock content %}

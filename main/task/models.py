@@ -10,7 +10,7 @@ class Task(models.Model):
     title = models.CharField(max_length=299)
     description = models.TextField(null=True, blank=True)
     complete = models.BooleanField(default=False)
-    date_created = models.DateTimeField()
+    date_created = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return self.title
@@ -18,4 +18,7 @@ class Task(models.Model):
     def was_recently_created(self):
         now = timezone.now()
         return now - datetime.timedelta(days=1) <= self.date_created <= now
+    
+    def get_absolute_url(self):
+        return reverse('task-list')
     
